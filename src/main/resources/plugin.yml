@@ -1,0 +1,12 @@
+name: SimpleUHC
+version: '${project.version}'
+main: confusedalex.simpleuhc.SimpleUHC
+api-version: 1.17
+authors: [ confused_alex ]
+description: A simple UHC plugin!
+
+
+commands:
+  suhc:
+    description: suhc commands
+    usage: /<command>
