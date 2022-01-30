@@ -21,6 +21,7 @@ public class GameManager {
     private final ArrayList<UUID> livingPlayer = new ArrayList<>();
     private final ArrayList<Location> spawnLocations = new ArrayList<>();
     private TeamManager teamManager = new TeamManager(this);
+    AdminGUI adminGUI = new AdminGUI(this);
 
     public GameManager(SimpleUHC plugin) {
         this.plugin = plugin;

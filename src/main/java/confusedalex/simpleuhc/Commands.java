@@ -50,6 +50,9 @@ public class Commands implements CommandExecutor {
                     gameManager.addSpawnLocation(player.getLocation());
                     sender.sendMessage(prefix + "Spawn Point added! " + "(" + gameManager.getSpawnLocations().size() + ")");
                 }
+                if (args[0].equalsIgnoreCase("setup")) {
+                    gameManager.adminGUI.openGUI(sp);
+                }
                 if (args[0].equalsIgnoreCase("team")) {
                     if (args.length >= 2 ) {
                         if (args[1].equalsIgnoreCase("create")) {

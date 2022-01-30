@@ -98,14 +98,14 @@ public class Events implements Listener {
         }
     }
 
-    @EventHandler
-    public void JoinEvent(PlayerJoinEvent e){
-        if (!e.getPlayer().isOp()) {
-            if (gameManager.getGameState() == GameState.LOBBY) {
-                e.getPlayer().setGameMode(GameMode.ADVENTURE);
-            } else {
-                e.getPlayer().setGameMode(GameMode.SPECTATOR);
-            }
-        }
-    }
+//    @EventHandler
+//    public void JoinEvent(PlayerJoinEvent e){
+//        if (!e.getPlayer().isOp()) {
+//            if (gameManager.getGameState() == GameState.LOBBY) {
+//                e.getPlayer().setGameMode(GameMode.ADVENTURE);
+//            } else {
+//                e.getPlayer().setGameMode(GameMode.SPECTATOR);
+//            }
+//        }
+//    }
 }
