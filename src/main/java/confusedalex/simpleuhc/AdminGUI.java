@@ -1,45 +1,41 @@
 package confusedalex.simpleuhc;
 
-import dev.triumphteam.gui.builder.item.ItemBuilder;
-import dev.triumphteam.gui.guis.Gui;
-import dev.triumphteam.gui.guis.GuiItem;
-import net.kyori.adventure.text.Component;
-import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import redempt.redlib.inventorygui.InventoryGUI;
+import redempt.redlib.inventorygui.ItemButton;
+import redempt.redlib.itemutils.ItemBuilder;
+
+import java.awt.*;
+
+import static confusedalex.simpleuhc.SimpleUHC.prefix;
 
 public class AdminGUI {
     private GameManager gameManager;
-    Gui gui;
+    InventoryGUI gui = new InventoryGUI(Bukkit.createInventory(null, 9, "SimpleUHC - Setup"));
+
 
     public AdminGUI(GameManager gameManager) {
         this.gameManager = gameManager;
     }
 
     public void createGUI(){
-        gui = Gui.gui()
-                .title(Component.text("SimpleUHC"))
-                .rows(3)
-                .create();
-
-        GuiItem addSpawnItem = ItemBuilder.from(Material.STONE).setName("Set SpawnPoint").lore(Component.text("SpawnPoints: " + gameManager.getSpawnLocations().size())).asGuiItem(event -> {
-            gameManager.addSpawnLocation(event.getWhoClicked().getLocation());
-            event.getWhoClicked().sendMessage("Hi");
-            gui.update();
+        ItemButton button = ItemButton.create(new ItemBuilder(Material.EMERALD_BLOCK)
+                .setName("Click me!").addLore("SpawnPoints: " + gameManager.getSpawnLocations().size()), e -> {
+            gameManager.addSpawnLocation(e.getWhoClicked().getLocation());
+            createGUI();
         });
-
-        gui.disableItemTake();
-        gui.disableItemSwap();
-        gui.disableItemDrop();
-        gui.disableItemPlace();
-        gui.addItem(addSpawnItem);
-        gui.getFiller().fill(ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE).asGuiItem());
+        gui.addButton(button, 5);
+//        gui.fill(0,9, Material.GLASS);
     }
 
     public void openGUI(Player player){
         createGUI();
         gui.open(player);
     }
+
 
 
 
