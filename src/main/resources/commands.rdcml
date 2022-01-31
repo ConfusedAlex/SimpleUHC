@@ -1,0 +1,52 @@
+suhc {
+        start {
+                help starts the game
+                user player
+                hook start
+
+                confirm {
+                        user player
+                        hook startconfirm
+                }
+         }
+
+        addspawn {
+                help adds SpawnPoints
+                user player
+                hook addspawn
+        }
+
+        setup {
+                help Open a setup GUI
+                user player
+                hook setup
+        }
+
+        team {
+                user player
+
+                create string:name* {
+                        help Creates a team
+                        user player
+                        hook teamcreate
+                }
+
+                leave {
+                        help Makes you leave your current team
+                        user player
+                        hook teamleave
+                }
+
+                join string:name* {
+                        help Join a team
+                        user player
+                        hook teamjoin
+                }
+        }
+
+        setcenter{
+                help Sets the Center of the world
+                user player
+                hook setcenter
+        }
+}

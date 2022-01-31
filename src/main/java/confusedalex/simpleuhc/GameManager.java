@@ -1,10 +1,7 @@
 package confusedalex.simpleuhc;
 
 import confusedalex.simpleuhc.Teams.TeamManager;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -16,6 +13,8 @@ import java.util.UUID;
 
 public class GameManager {
 
+    private World world;
+    private Location worldCenter;
     private GameState gameState;
     private final SimpleUHC plugin;
     private final ArrayList<UUID> livingPlayer = new ArrayList<>();
@@ -59,6 +58,7 @@ public class GameManager {
                 for (Player player : Bukkit.getOnlinePlayers()){
                     if (player.getGameMode() != GameMode.SPECTATOR) {
                         player.setGameMode(GameMode.SURVIVAL);
+                        player.setOp(false);
                         player.getInventory().clear();
                         player.setHealth(20);
                         player.setFoodLevel(20);
@@ -105,5 +105,21 @@ public class GameManager {
 
     public GameState getGameState() {
         return gameState;
+    }
+
+    public Location getWorldCenter() {
+        return worldCenter;
+    }
+
+    public void setWorldCenter(Location worldCenter) {
+        this.worldCenter = worldCenter;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }

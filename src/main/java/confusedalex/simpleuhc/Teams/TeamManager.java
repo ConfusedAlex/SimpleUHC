@@ -13,6 +13,11 @@ public class TeamManager {
     private final GameManager gameManager;
     ArrayList<Team> teams = new ArrayList<>();
     ArrayList<ChatColor> availableColors = new ArrayList<>();
+
+    public ArrayList<Team> getTeams() {
+        return teams;
+    }
+
     ArrayList<String> unavailableNames = new ArrayList<>();
 
     public ArrayList<String> getUnavailableNames() {
@@ -45,7 +50,7 @@ public class TeamManager {
     public int livingTeams(){
         int teams = 0;
         for (UUID uuid : gameManager.getLivingPlayer()){
-            if (isInTeam(Bukkit.getPlayer(uuid))){
+            if (isInATeam(Bukkit.getPlayer(uuid))){
                 teams++;
             }
         }
@@ -61,7 +66,7 @@ public class TeamManager {
         return null;
     }
 
-    public boolean isInTeam(Player player){
+    public boolean isInATeam(Player player){
         for (Team t : teams){
             if (t.isMember(player)){
                 return true;
