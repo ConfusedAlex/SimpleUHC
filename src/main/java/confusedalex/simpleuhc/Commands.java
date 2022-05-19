@@ -49,11 +49,6 @@ public class Commands /* implements CommandExecutor */  {
         }
     }
 
-    @CommandHook("setup")
-    public void setup(Player player){
-        gameManager.adminGUI.openGUI(player);
-    }
-
     @CommandHook("teamcreate")
     public void teamCreate(Player player, String name){
         if (gameManager.getTeamManager().getUnavailableNames().contains(name)) {
