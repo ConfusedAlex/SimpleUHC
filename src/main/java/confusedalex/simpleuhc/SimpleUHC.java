@@ -17,7 +17,6 @@ public final class SimpleUHC extends JavaPlugin {
 
         new CommandParser(this.getResource("commands.rdcml")).parse().register("simpleuhc", new Commands(gameManager));
 
-//        this.getCommand("suhc").setExecutor(new Commands(gameManager));
         Bukkit.getPluginManager().registerEvents(new Events(gameManager, this), this);
 
         gameManager.setGameState(GameState.LOBBY);

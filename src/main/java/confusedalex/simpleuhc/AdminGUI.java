@@ -1,6 +1,5 @@
 package confusedalex.simpleuhc;
 
-import confusedalex.simpleuhc.Teams.TeamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,7 +11,7 @@ import redempt.redlib.itemutils.ItemBuilder;
 import static confusedalex.simpleuhc.SimpleUHC.prefix;
 
 public class AdminGUI {
-    private GameManager gameManager;
+    private final GameManager gameManager;
     InventoryGUI gui = new InventoryGUI(Bukkit.createInventory(null, 9, "SimpleUHC - Setup"));
 
 
@@ -49,11 +48,4 @@ public class AdminGUI {
         createGUI();
         gui.open(player);
     }
-
-
-
-
-
-
-
 }

@@ -15,11 +15,13 @@ public class GameManager {
 
     private World world;
     private Location worldCenter;
+    private WorldBorder worldBorder;
     private GameState gameState;
+    private boolean centerSet = false;
     private final SimpleUHC plugin;
     private final ArrayList<UUID> livingPlayer = new ArrayList<>();
     private final ArrayList<Location> spawnLocations = new ArrayList<>();
-    private TeamManager teamManager = new TeamManager(this);
+    private final TeamManager teamManager = new TeamManager(this);
     AdminGUI adminGUI = new AdminGUI(this);
 
     public GameManager(SimpleUHC plugin) {
@@ -74,9 +76,13 @@ public class GameManager {
                 Countdown countdown = new Countdown(this, plugin);
                 countdown.startCountdown();
                 break;
-            case ACTIVE:
+            case PREACTIVE:
                 ProtectionTime protectionTime = new ProtectionTime(this, plugin);
                 protectionTime.startPT();
+                break;
+            case ACTIVE:
+                ShrinkBorder shrinkBorderActive = new ShrinkBorder(this, plugin);
+                shrinkBorderActive.shrink(400, 2700);
                 break;
             case PREDEATHMATCH:
                 DeathMatchCountdown deathMatchCountdown = new DeathMatchCountdown(this, plugin);
@@ -84,6 +90,8 @@ public class GameManager {
                 break;
             case DEATHMATCH:
                 Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(player -> player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 20)));
+                ShrinkBorder shrinkBorderDM = new ShrinkBorder(this, plugin);
+                shrinkBorderDM.shrink(100, 300);
                 break;
             case WON:
                 for (Player player : Bukkit.getOnlinePlayers()){
@@ -122,4 +130,21 @@ public class GameManager {
     public void setWorld(World world) {
         this.world = world;
     }
+
+    public WorldBorder getWorldBorder() {
+        return worldBorder;
+    }
+
+    public void setWorldBorder(WorldBorder worldBorder) {
+        this.worldBorder = worldBorder;
+    }
+
+    public boolean isCenterSet() {
+        return centerSet;
+    }
+
+    public void setCenterSet(boolean centerSet) {
+        this.centerSet = centerSet;
+    }
+
 }

@@ -1,5 +1,6 @@
 package confusedalex.simpleuhc;
 
+import confusedalex.simpleuhc.Teams.Team;
 import confusedalex.simpleuhc.Teams.TeamManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -31,7 +32,11 @@ public class Commands /* implements CommandExecutor */  {
 
     @CommandHook("startconfirm")
     public void startConfirm(CommandSender sender){
-        gameManager.setGameState(GameState.STARTING);
+        if (gameManager.isCenterSet()) {
+            gameManager.setGameState(GameState.STARTING);
+        } else {
+            sender.sendMessage(prefix + "You need to set the center of the world with /suhc setcenter");
+        }
     }
 
     @CommandHook("addspawn")
@@ -65,12 +70,13 @@ public class Commands /* implements CommandExecutor */  {
     @CommandHook("teamleave")
     public void leaveTeam(Player player){
         if (tm.isInATeam(player)) {
-            tm.getTeam(player).removeMember(player);
+            Team team = tm.getTeam(player);
+            team.removeMember(player);
             player.sendMessage(prefix + "You left your team!");
-        }
 
-        if (tm.getTeam(player).getSize() == 0){
-            gameManager.getTeamManager().deleteTeam(tm.getTeam(player));
+            if (team.getSize() == 0){
+                gameManager.getTeamManager().deleteTeam(team);
+            }
         }
     }
 
@@ -91,6 +97,12 @@ public class Commands /* implements CommandExecutor */  {
 
     @CommandHook("setcenter")
     public void setCenter(Player player){
-
+       gameManager.setWorld(player.getWorld());
+       gameManager.setWorldCenter(player.getLocation());
+       gameManager.setWorldBorder(player.getWorld().getWorldBorder());
+       gameManager.getWorldBorder().setCenter(player.getLocation());
+       gameManager.getWorldBorder().setSize(1200);
+       gameManager.setCenterSet(true);
+       player.sendMessage(prefix + "Center was set!");
     }
 }

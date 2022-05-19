@@ -19,7 +19,7 @@ public class Countdown {
         BukkitScheduler scheduler = Bukkit.getScheduler();
         scheduler.runTaskTimer(plugin, task -> {
             if (countdownTime == 0){
-                gameManager.setGameState(GameState.ACTIVE);
+                gameManager.setGameState(GameState.PREACTIVE);
                 task.cancel();
                 return;
             }
